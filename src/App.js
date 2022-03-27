@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+
+import React,{useState}  from 'react';
 import './App.css';
+import Form from './compponents/Form';
+import TodoList from './compponents/TodoList';
+
 
 function App() {
+  const [inputText,setInputText]=useState("");
+  const [todos,setTodos]=useState([]); 
+  const submitTodoHandler=(e)=>{
+
+    setTodos([...todos,
+     {text:inputText,complete:false 
+        ,id :Math.random()*1000000},]);
+    setInputText('');
+    console.log('test');
+     };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+<div className='App'>
+  <header>
+    <h1>Mika's To Do List</h1>
+</header>
+<Form inputText={inputText} setInputText={setInputText} 
+submitTodoHandler={submitTodoHandler}/>
+<TodoList setTodos={setTodos} todos={todos} />
+</div>
   );
 }
 
